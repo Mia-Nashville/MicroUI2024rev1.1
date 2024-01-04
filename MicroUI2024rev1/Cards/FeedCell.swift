@@ -62,6 +62,7 @@ struct FeedCell: View {
                     
                     NavigationLink(destination: {
                         // MARK: Add Daily Report Here
+                        DailyReportSetup(siteActivity: "Drilled 4 piles, 400 Linear ft, cleaned up spoil and cutoff Piles.", materialDelivered: "27 ton cement, 110 gals Diesel", delayEncountered: "2 hours heavy rain", conversation: "GC enforced shutdown due to weather")
                         
                     }, label: {
                         Image(systemName: "doc.fill.badge.plus")

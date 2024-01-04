@@ -17,13 +17,14 @@ struct DailyReportSetup: View {
     @State var showAlertIcon: Bool = false
     @State private var selectedImage: UIImage?
     @State private var postImage: Image?
+    @Environment(\.dismiss) var dismiss
     
     @State var backgroundGradient =  RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1006665184, green: 0.007843137719, blue: 0.7041791803, alpha: 1)).opacity(0.8),Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)).opacity(0.9), Color(#colorLiteral(red: 0.07443883983, green: 0.007843137719, blue: 0.4499540527, alpha: 1)).opacity(0.9)]), center: .bottomTrailing, startRadius: 4, endRadius: 400)
     
     var body: some View {
         ScrollView {
             HStack {
-                VStack(alignment: .leading, spacing: 5) {
+                VStack(alignment: .leading, spacing: 0) {
                     Text("Daily Site Report")
                         .foregroundColor(Color.white)
                         .font(.title.bold())
@@ -40,7 +41,7 @@ struct DailyReportSetup: View {
                         .padding(.leading, 1)
                         .font(.headline)
                         
-                        VStack(spacing: 12) {
+                        VStack(spacing: 5) {
                             Text("Site Activity")
                                 .modifier(fontModifier())
                             
@@ -77,7 +78,7 @@ struct DailyReportSetup: View {
                             }
                             .padding(.bottom, 15)
                             
-                            VStack(spacing: 10) {
+                            VStack(spacing: 5) {
                                 Button { self.showImagePicker = true
                                     //   print("Show Image Picker")
                                 } label: {
@@ -100,27 +101,53 @@ struct DailyReportSetup: View {
                                     }
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.white.opacity(0.6), lineWidth: 2))
+                                            .stroke(Color.white.opacity(0.6), lineWidth: 1))
                                     
                                 }
                                 .padding(.horizontal, 40)
                                 
                                 HStack(spacing: 5) {
                                     Button(action: {
-                                        
+                                        // MARK: Add viewModel for Daily Report here
                                         showAlertIcon = true
                                     }, label: {
-                                        /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+                                        Text("Submit")
+                                            .font(.subheadline)
+                                            .fontWeight(.semibold)
+                                            .foregroundStyle(Color.white)
+                                            .frame(width: 160, height: 46)
+                                            .background(.black)
+                                            .cornerRadius(12)
+                                            .padding(.vertical, 5)
+                                    })
+                                    .padding()
+                                    Button(action: {
+                                        dismiss()
+                                    }, label: {
+                                        Text("Cancel")
+                                            .font(.subheadline)
+                                            .fontWeight(.semibold)
+                                            .foregroundStyle(Color.white)
+                                            .frame(width: 160, height: 46)
+                                            .background(.indigo)
+                                            .cornerRadius(12)
+                                            .padding(.vertical, 5)
                                     })
                                 }
-                                
                             }
+                            
+                            .alert("Notification", isPresented: $showAlertIcon, actions: {
+                                Text("Project Is Now Saved")
+                            })
                         }
                     }
                 }
-                }
-            } .background(backgroundGradient)
-        }
+                .sheet(isPresented: $showImagePicker, content: {
+                    ImagePicker(image: $selectedImage)
+                })
+            }
+        } .background(backgroundGradient)
+    }
     }
 
 
