@@ -11,20 +11,21 @@ struct FeedView: View {
     @ObservedObject var viewModel = ProjectViewModel()
     
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 20) {
-                ForEach(viewModel.projectVM, id: \.self) {projects in
-                    NavigationLink(destination: {
-                        
-                    }, label: {
-                        FeedCell(projects: projects)
-                    })
+        NavigationStack {
+            ScrollView {
+                LazyVStack(spacing: 20) {
+                    ForEach(viewModel.projectVM, id: \.self) {projects in
+                        NavigationLink(destination: {
+                            
+                        }, label: {
+                            FeedCell(projects: projects)
+                        })
+                    }
                 }
+                .padding(.top)
+                .navigationTitle("Micropile Projects")
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .padding(.top)
-        }
-        .onAppear {
-            viewModel.fetchProjectData()
         }
     }
 }

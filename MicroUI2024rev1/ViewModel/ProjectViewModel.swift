@@ -14,7 +14,7 @@ class ProjectViewModel: ObservableObject {
  
     init() {
         fetchProjectData()
-        fetchAllProjects()
+
     }
     
     func createMainProjects(clientName: String, location: String, projectManager: String, projectNumber: String, projectName: String, projectDescription: String, superintendent: String, image: UIImage? ) {
@@ -46,7 +46,6 @@ class ProjectViewModel: ObservableObject {
       // COLLECTION_PROJECTS.getDocuments { querySnapshot, _ in
         Firestore.firestore().collection("Micropile Projects 2024").getDocuments { querySnapshot, _ in
     
-            guard let uid = Auth.auth().currentUser?.uid else { return }
             guard let documents = querySnapshot?.documents else { return }
             self.projectVM = documents.map({ queryDocumentSnapshot -> ProjectModel in
                 let data = queryDocumentSnapshot.data()
@@ -59,9 +58,9 @@ class ProjectViewModel: ObservableObject {
                 let projectNumber = data["projectNumber"] as? String ?? ""
                 let superintendent = data["superintendent"] as? String ?? ""
                 let timeStamp = data["timeStamp"] as? Timestamp ?? Timestamp()
-                let uid = data["uid"] as? String ?? ""
+                let imageUrlString = data["imageUrlString"] as? String ?? ""
                 
-                return ProjectModel(location: location, projectManager: projectManager, projectNumber: projectNumber, projectTitle: projectName, projectDescription: projectDescription, superintendent: superintendent, ownerUid: ownerUid, timestamp: timeStamp)
+                return ProjectModel(clientName: clientName, location: location, imageUrlString: imageUrlString, projectManager: projectManager, projectNumber: projectNumber, projectTitle: projectName, projectDescription: projectDescription, superintendent: superintendent, ownerUid: ownerUid, timestamp: timeStamp)
                 
                 
                 

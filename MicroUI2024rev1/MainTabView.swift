@@ -33,7 +33,6 @@ struct MainTabView: View {
                 .tag(1)
             
             ProjectSetup()
-          //  CreateProjectLog()
                 .tabItem {
                     Image(systemName: selectedTab == 2 ? "plus.circle.fill" : "plus")
                         .environment(\.symbolVariants, selectedTab == 2 ? .fill : .none)

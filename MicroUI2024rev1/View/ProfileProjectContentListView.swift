@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct ProfileProjectContentListView: View {
+    @StateObject var viewmodel = ProjectViewModel()
     
     var body: some View {
         ScrollView{
             VStack(alignment: .leading) {
                 LazyVStack {
-                    ForEach(0..<10, id: \.self) {projects in
-                        ProjectCell()
+                    ForEach(viewmodel.projectVM, id: \.self) { projects in
+                        ProjectCell(projects: projects)
+//                    ForEach(0..<10, id: \.self) {projects in
+//                        ProjectCell(projects: <#ProjectModel#>)
                     }
                 }
             }

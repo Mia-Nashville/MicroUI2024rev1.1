@@ -19,7 +19,7 @@ struct HazardDetailView: View {
                 Image(selectedsafety.jobphoto)
                     .resizable()
                 //  .aspectRatio(contentMode: .fit)
-                    .frame(width: .infinity, height: 400)
+                    .frame(width: 400, height: 400)
                     .clipped()
                     .overlay(
                         HStack {

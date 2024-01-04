@@ -17,22 +17,25 @@ struct FeedCell: View {
                 KFImage(URL(string: profileImageUrl))
                     .resizable()
                     .padding(.vertical, 10)
-                    .frame(width: 360, height: 360)
-                    .cornerRadius(20)
+                    .frame(width: 400, height: 340)
+                    .cornerRadius(5)
             }
             
-            Text(projects.projectTitle)
-                .font(.title3)
-                .fontWeight(.black)
-                .lineLimit(2)
-                .padding(.bottom, 0)
-            
-            Text(projects.location)
-                .font(.headline)
-                .fontWeight(.semibold)
-                .lineLimit(2)
-                .padding(.bottom, 0)
-            
+            VStack {
+                Text(projects.projectTitle)
+                    .font(.title3)
+                    .fontWeight(.black)
+                    .lineLimit(2)
+                    .padding(.bottom, 0)
+                
+                Text(projects.location)
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .lineLimit(2)
+                    .padding(.bottom, 0)
+            }
+            .padding(.horizontal, 10)
+                
             VStack(spacing: 5) {
                 HStack(spacing: 20) {
                     NavigationLink(destination: {
@@ -89,8 +92,8 @@ struct FeedCell: View {
                     .foregroundColor(Color.black)
                     .background(.ultraThickMaterial)
                 }
-                .padding(.vertical, 5)
             }
+            .padding(.horizontal, 10)
         }
     }
 }

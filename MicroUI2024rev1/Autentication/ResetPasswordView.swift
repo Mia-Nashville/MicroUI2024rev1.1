@@ -53,9 +53,8 @@ struct ResetPasswordView: View {
                         .fontWeight(.semibold)
                         .padding(.vertical, 5)
                       
-                    
-                    NavigationLink(destination: {
-                        RegistrationView()
+                    Button(action: {
+                        dismiss()
                     }, label: {
                         HStack {
                             Text("Don't have an account:")
@@ -66,7 +65,7 @@ struct ResetPasswordView: View {
                         }
                         .foregroundStyle(Color.black)
                     })
-                    
+                    .navigationBarBackButtonHidden(true)
                 }
             
         }

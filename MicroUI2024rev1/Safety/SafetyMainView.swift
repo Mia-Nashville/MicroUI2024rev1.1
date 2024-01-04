@@ -20,7 +20,7 @@ struct SafetyMainView: View {
                         .padding(5)
                     
                     LazyVStack(alignment: .leading) {
-                        ForEach(insiteCollections) { items in
+                        ForEach(insiteCollections.sorted(by: { $0.title < $1.title })) { items in
                         NavigationLink(destination: {
                             HazardDetailView(selectedsafety: items)
                        //    SafetyDetailView(selectedSafety: items)
@@ -35,6 +35,8 @@ struct SafetyMainView: View {
     }
 }
 
-#Preview {
-    SafetyMainView()
+struct SafetyMainView_Preview: PreviewProvider {
+    static var previews: some View {
+        SafetyMainView()
+    }
 }
